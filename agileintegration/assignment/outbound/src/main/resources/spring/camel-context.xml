@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+    					http://www.springframework.org/schema/beans/spring-beans.xsd  
+						http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+						http://camel.apache.org/schema/cxf  http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+		<cxf:cxfEndpoint
+        address="http://localhost:8080/ws/customerService"
+        id="customerWebService" loggingFeatureEnabled="true"
+        serviceClass="org.fuse.usecase.service.CustomerWS" wsdlURL="classpath:wsdl/customerService.wsdl"/>
+						
+	    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="properties" location="camel.properties"/>
+        <route>        	
+			<from uri="{{route1.from.endPoint}}"/>
+			<log id="_log_unmarshal1" message="First Message --> ${body}"/>
+			 <unmarshal id="_unmarshal1">
+                  <jaxb id="jaxb" prettyPrint="true" objectFactory="true" contextPath="com.nextgate.ws.entities"/>
+            </unmarshal>
+            
+           <log id="_route1_log2" message="after Unmarshalling Message --> ${body}"/>
+            
+			 <to id="_to5" uri="{{route1.to.endPoint}}"/>
+		</route>
+		<route>
+        	<from id="route2" uri="direct:route-typeconvert"/>
+        	<convertBodyTo type="com.nextgate.ws.entities.Account"/>
+			<log id="_route2_log2" message="${body}"/>
+			<to uri="direct://callWSEndpoint"/>
+		</route>
+		
+		<route id="_route5">
+            <from id="_from5" uri="direct://callWSEndpoint"/>
+			 <log id="_log12" message="After UnMarshal: ${body}"/>
+            <to id="_to7" uri="cxf:bean:customerWebService"/>
+            <log id="_log10" loggingLevel="INFO" message=">> WebService Response : ${body[0].id}, ${body[0].salesContact}, ${body[0].company.geo}, ${body[0].contact.firstName}, ${body[0].contact.lastName} "/>
+        </route>
+    </camelContext>
+</beans>

@@ -1,0 +1,16 @@
+<mappings xmlns="http://dozermapper.github.io/schema/bean-mapping"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozermapper.github.io/schema/bean-mapping http://dozermapper.github.io/schema/bean-mapping.xsd">
+  <mapping>
+    <class-a>org.mycompany.entities.Patient</class-a>
+    <class-b>com.nextgate.ws.entities.PatientNew</class-b>
+    <field>
+      <a>name</a>
+      <b>name</b>
+    </field>
+    <field>
+      <a>id</a>
+      <b>id</b>
+    </field>
+  </mapping>
+</mappings>
