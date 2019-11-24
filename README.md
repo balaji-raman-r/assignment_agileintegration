@@ -21,7 +21,7 @@ This is the final sub-project that reads the message from the queue and invokes 
 
 Executing the sub projects:
 
-Inbound:
+Step 1: Starting the Inbound Application:
 
 Change the directory to the inbound.
 
@@ -39,4 +39,41 @@ Start the application:
 mvn spring-boot:run
 ```
 
+After the application is started successfully, you will notice the below statements in the console log.
 
+```
+[main] INFO  o.s.b.c.e.u.UndertowEmbeddedServletContainer - Undertow started on port(s) 8082 (http)
+.
+.
+[main] INFO  c.r.t.gpte.springboot.Application - Started Application in 5.95 seconds (JVM running for 9.162)
+```
+
+Step 2: Starting the Xlate Application:
+
+Open another terminal window execute the below steps.
+
+Change the directory to the xlate.
+
+
+```
+cd ~/agileintegration/assignment/xlate
+```
+Compile the code:
+
+```
+mvn clean install -DskipTests
+```
+Start the application:
+
+```
+mvn spring-boot:run
+```
+
+After the application is started successfully, you will notice the below statements in the console log.
+
+```
+[main] INFO  o.s.b.c.e.u.UndertowEmbeddedServletContainer - Undertow started on port(s) 8183 (http)
+.
+.
+[main] INFO  c.r.t.gpte.springboot.Application - Started Application in 5.789 seconds (JVM running for 10.088)
+```
