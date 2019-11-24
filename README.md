@@ -35,6 +35,14 @@ To test the application:
   <li>Trigger the REST API Call with the test data.</li>    
 </ul>
 
+Download the source code locally to the home directory.
+
+```
+cd ~
+
+git clone https://github.com/balaji-raman-r/assignment_agileintegration.git
+
+```
 
 Starting the sub projects:
 
