@@ -145,3 +145,9 @@ curl -k -d@patient2.json -X POST http://localhost:8181/rest/patient/update --hea
 curl -k -d@patient3.json -X POST http://localhost:8181/rest/patient/update --header "Content-Type: application/json"
 
 ```
+
+To test the validation:
+
+```
+curl -k -d@patient-nofile.json -X POST http://localhost:8181/rest/patient/update --header "Content-Type: application/json"
+```
