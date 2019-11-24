@@ -20,7 +20,7 @@ Obtain the project and enter the project's directory
 Build the project:
 
 ```
-$ mvn tests
+$ mvn test
 ```
 
 
