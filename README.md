@@ -19,7 +19,17 @@ This sub-project is used to read the message published by the Inbound project fr
 This is the final sub-project that reads the message from the queue and invokes a call to the webservice operation.
 
 
-Executing the sub projects:
+To test the application:
+
+<ul>
+  <li>AMQ Broker needs to be started.</li>
+  <li>Message Queues have to be created.</li>
+  <li>The sub-projects have to be started in a certain sequence.</li>
+  <li>Trigger the test data</li>    
+</ul>
+
+
+Starting the sub projects:
 
 Step 1: Starting the Inbound Application:
 
@@ -53,7 +63,6 @@ Step 2: Starting the Xlate Application:
 Open another terminal window execute the below steps.
 
 Change the directory to the xlate.
-
 
 ```
 cd ~/agileintegration/assignment/xlate
