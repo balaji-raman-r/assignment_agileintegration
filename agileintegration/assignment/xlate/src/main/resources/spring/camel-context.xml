@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+    					http://www.springframework.org/schema/beans/spring-beans.xsd  
+						http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+								
+	    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="properties" location="camel.properties"/>
+       
+        <route>        	
+			<from id="route1" uri="{{route1.from.endPoint}}"/>
+			<log id="route1_log1" message="First Message--> ${body}"/>
+			<unmarshal>
+				<jaxb id="jaxb" prettyPrint="true" objectFactory="true" contextPath="org.mycompany.entities"/>
+			</unmarshal>
+			<log id="_route1_log2" message="after Unmarshalling Message --> ${body}"/>
+			<to uri="{{route1.to.endPoint}}"/>
+		</route>
+		<route>
+        	<from id="route2" uri="{{route2.from.endPoint}}"/>
+        	<convertBodyTo type="com.nextgate.ws.entities.ExecuteMatchUpdate"/>
+			<log id="_route2_log2" message="${body}"/>
+			<to uri="{{route2.to.endPoint}}"/>
+		</route>
+		<route>
+			<from id="route-marshal" uri="{{route3.from.endPoint}}"/>
+			<marshal>
+				<jaxb id="jaxb_1" prettyPrint="true" objectFactory="true" contextPath="com.nextgate.ws.entities"/>
+			</marshal>
+			<log id="_log_marshal_route3" message="After Marshaling to XML:${body}"/>
+			<to uri="{{route3.to.endPoint}}"/>
+		</route>
+		<route>
+			<from id="route-publish-nextGate-Q" uri="direct:route-publish-nextGate-Q"/>
+			<log id="_log_in_route3" message="Incoming Request: ${body}"/>
+			<to uri="amqp:queue:q.empi.nextgate.out"/>
+			<log id="_log_publish_nextGate_Q" message="Message published to the Next Gate Queue (q.empi.nextgate.out)"/>
+		</route>
+    </camelContext>
+</beans>
