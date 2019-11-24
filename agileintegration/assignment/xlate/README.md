@@ -10,11 +10,24 @@ The application utilizes the Spring to load a Camel Context definition via a [ca
 
 The example can be built with
 
-    mvn clean install
+    mvn clean install -DskipTests
+
+### To execute the Unit Test Cases:
+
+You can also execute the test cases as follows.
+
+Obtain the project and enter the project's directory
+Build the project:
+
+```
+$ mvn tests
+```
+
+
 
 ### Running the Xlate standalone on your machine
 
-You can also run this quickstart as a standalone project directly:
+You can also run this application as a standalone project directly:
 
 Obtain the project and enter the project's directory
 Build the project:
