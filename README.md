@@ -19,3 +19,24 @@ This sub-project is used to read the message published by the Inbound project fr
 This is the final sub-project that reads the message from the queue and invokes a call to the webservice operation.
 
 
+Executing the sub projects:
+
+Inbound:
+
+Change the directory to the inbound.
+
+```
+cd ~/agileintegration/assignment/inbound
+```
+Compile the code:
+
+```
+mvn clean install -DskipTests
+```
+Start the application:
+
+```
+mvn spring-boot:run
+```
+
+
