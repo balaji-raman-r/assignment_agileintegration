@@ -19,19 +19,19 @@ This sub-project is used to read the message published by the Inbound project fr
 This is the final sub-project that reads the message from the queue and invokes a call to the webservice operation.
 
 
-To test the application:
+To test the application, please ensure the following:
 
 <ul>
-  <li>AMQ Broker needs to be started.</li>
+  <li>AMQ Broker is started and the connection parameters are updated in the properties file.</li>
   <li>
-    Message Queues have to be created.
+    The following message queues are created.
     <ul>
       <li>patient</li>
       <li>q.empi.nextgate.out</li>
     </ul>
   </li>
-  <li>The sub-projects (Inbound, Xlate, Outbound) are started in separate terminals.</li>
-  <li>The test web service is up and running.</li>
+  <li>The sub-projects (Inbound, Xlate, Outbound) are started in separate terminal windows.</li>
+  <li>The test web service is started and it is up and running.</li>
   <li>Trigger the REST API Call with the test data.</li>    
 </ul>
 
