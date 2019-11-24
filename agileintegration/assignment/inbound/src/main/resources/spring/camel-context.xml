@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+    					http://www.springframework.org/schema/beans/spring-beans.xsd  
+						 					http://camel.apache.org/schema/spring 
+						 					http://camel.apache.org/schema/spring/camel-spring.xsd">
+    
+    <bean class="org.mycompany.service.PatientService" id="patientService"/>     
+        
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="properties" location="camel.properties"/>
+        <dataFormats>
+	         <json id="jack" library="Jackson" unmarshalTypeName="org.mycompany.entities.Patient"/>	         
+	         <jaxb id="jaxb" prettyPrint="true" objectFactory="true" contextPath="org.mycompany.entities"/> 
+        </dataFormats>        
+         <restConfiguration apiContextPath="api-docs" bindingMode="json"  			 
+            component="servlet" contextPath="/inbound"		
+            enableCORS="true" >		
+            <apiProperty key="cors" value="true"/>		
+            <apiProperty key="api.title" value="Patient Service"/>		
+            <apiProperty key="api.version" value="1.0.0"/>		
+        </restConfiguration>
+        
+        <rest id="rest-566db8bd-c96b-47e3-8995-567ee07962f3">  			 
+  			 <post uri="/patient/update" type="org.mycompany.entities.Patient" consumes="application/json">
+					<to uri="direct:rest4"/>
+  			 </post>
+        </rest>
+        <route>
+        	<from id="rest4" uri="direct:rest4"/>
+
+        	 <log id="log_3_rest21" message="-->${headers}"/>
+        	 <log id="log_3_rest22" message="2nd Body-->${body}"/>
+        	<log id="_log6" message=">> REST Response : ${body}"/>
+        	<to uri="direct:rest5"/> 
+        </route>
+         <route>
+         <from id="rest15" uri="direct:rest15"/>
+         <log id="_log18" message=">> Please provide all the mandatory fields"/> 
+         </route>
+
+        <route>
+        	<from id="rest5" uri="direct:rest5"/>
+        	 <log id="_log8" message=">> Come here... Response : ${body}"/>
+    			<marshal ref="jaxb"/>
+    		 <log id="_log8" message=">> JAXB Response : ${body}"/>
+    		<setExchangePattern id="_setExchangePattern3" pattern="InOnly"/>
+    		 <log message="Property Value env is :: {{env}}" />
+    		 <choice>
+            <when>
+                <simple>'{{env}}' == 'test'</simple>
+             		<to uri="mock:out"/>
+             	</when>
+             <otherwise>
+             	  <to uri="amqp:queue:patient"/>
+             </otherwise>
+             </choice>            
+              <log id="_log9" message=">> Message has been delivered to the queue"/>  
+            <onException id="_onException1">
+                <exception>java.lang.NullPointerException</exception>
+                <handled>
+                    <constant>true</constant>
+                </handled>
+                <log id="_log1234" message=">>Invalid Input Data"/>
+                <to uri="direct:error-response"/>     
+            </onException>  
+            
+            <onException id="_onException_jms">
+                <exception>org.springframework.jms.UncategorizedJmsException</exception>
+                <handled>
+                    <constant>true</constant>
+                </handled>
+                <log id="_log12345" message="Please check if the AMQ Broker is up and running."/>
+                <to uri="direct:jms-conn-error-response"/>     
+            </onException>   
+
+               <transform id="_transform2">
+    	            <constant>Processed the data. Done.</constant>
+	            </transform>
+        </route>
+		<route>
+			<from id="error-response" uri="direct:error-response"/>
+			<setExchangePattern id="_setExchangePattern_4" pattern="InOnly"/>
+			 <transform id="_transform_error">
+    	            <constant>The input data is invalid. Please provide a valid data.</constant>
+	         </transform>   
+		</route>
+		<route>
+			<from id="jms-conn-error-response" uri="direct:jms-conn-error-response"/>
+			<setExchangePattern id="_setExchangePattern_5" pattern="InOnly"/>
+			 <transform id="_transform_error_jms">
+    	            <constant>Please check if the AMQ Broker is up and running.</constant>
+	         </transform>   
+		</route>
+    </camelContext>
+</beans>

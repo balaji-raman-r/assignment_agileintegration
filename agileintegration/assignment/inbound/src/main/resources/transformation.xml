@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mappings xmlns="http://dozermapper.github.io/schema/bean-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://dozermapper.github.io/schema/bean-mapping https://dozermapper.github.io/schema/bean-mapping.xsd">
+    <configuration>
+        <wildcard>false</wildcard>
+    </configuration>
+    
+      <mapping>
+        <class-a>org.mycompany.entities.Patient</class-a>
+        <class-b>org.mycompany.entities.Patient</class-b>
+        <field>
+            <a>name</a>
+            <b>name</b>
+        </field>
+        <field>
+            <a>id</a>
+            <b>id</b>
+        </field>
+        <field>
+            <a>firstName</a>
+            <b>firstName</b>
+        </field>
+        <field>
+            <a>lastName</a>
+            <b>lastName</b>
+        </field>
+        <field>
+            <a>phone</a>
+            <b>phone</b>
+        </field>
+        <field>
+            <a>city</a>
+            <b>city</b>
+        </field>
+        <field>
+            <a>state</a>
+            <b>state</b>
+        </field>
+        <field>
+            <a>streetAddr</a>
+            <b>streetAddr</b>
+        </field>
+        <field>
+            <a>zip</a>
+            <b>zip</b>
+        </field>
+    </mapping>
+</mappings>

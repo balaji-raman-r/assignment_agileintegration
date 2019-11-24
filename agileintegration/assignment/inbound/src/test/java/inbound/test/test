@@ -1,0 +1,90 @@
+package inbound.test;
+
+import java.io.StringWriter;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+
+import org.apache.camel.EndpointInject;
+import org.apache.camel.Exchange;
+import org.apache.camel.Produce;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.camel.impl.DefaultExchange;
+import org.apache.camel.test.spring.CamelSpringTestSupport;
+import org.junit.Test;
+import org.mycompany.entities.Patient;
+import org.springframework.context.support.AbstractXmlApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class InboundFlowTest extends CamelSpringTestSupport{	
+	
+	@Override
+	public void setUp() throws Exception {
+	    super.setUp();
+	    System.out.println("$$$$$#@@#@@@$$$#@@@$$$");
+	    exchange = new DefaultExchange(context);
+	}
+
+    
+    @EndpointInject(uri = "mock:out")
+    protected MockEndpoint resultEndpoint;
+
+    @Produce(uri = "direct:rest5") 
+    private ProducerTemplate startEndpoint;
+    
+    protected Exchange exchange;
+
+    
+   @Test
+    public void testMessageCount() throws Exception {
+    	resultEndpoint.expectedMessageCount(1);
+		Patient person = new Patient();
+		person.setId("1");
+		person.setName("test");
+		startEndpoint.sendBody(person);
+	    resultEndpoint.assertIsSatisfied();
+    }
+    
+	@Test 
+	public void testJAXBOutput() throws Exception {
+	    
+		Patient person = new Patient();
+		person.setId("1");
+		person.setName("test");
+				
+		JAXBContext contextObj = JAXBContext.newInstance(Patient.class);  
+	        
+		Marshaller marshallerObj = contextObj.createMarshaller();  
+		marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);  
+		StringWriter sw = new StringWriter();
+		marshallerObj.marshal(person, sw);
+		
+		resultEndpoint.expectedBodiesReceived(sw.toString());
+	   
+	    startEndpoint.sendBody(person);		
+	    resultEndpoint.assertIsSatisfied(); 
+	   
+	}
+	
+	@Test
+	public void testValidation() throws Exception {
+		
+		String invalidJson = null;
+		String expectedOutput = "The input data is invalid. Please provide a valid data.";	
+		
+		String actualOutput = startEndpoint.requestBody("direct:rest4", invalidJson, String.class);
+	
+		
+		assertEquals(expectedOutput, actualOutput);
+		
+		
+		
+	}
+	
+	 @Override 
+	protected AbstractXmlApplicationContext createApplicationContext() {
+	        return new ClassPathXmlApplicationContext("spring/camel-context.xml");
+	}
+
+}
