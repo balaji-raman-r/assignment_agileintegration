@@ -23,9 +23,16 @@ To test the application:
 
 <ul>
   <li>AMQ Broker needs to be started.</li>
-  <li>Message Queues have to be created.</li>
-  <li>The sub-projects have to be started in a certain sequence.</li>
-  <li>Trigger the test data</li>    
+  <li>
+    Message Queues have to be created.
+    <ul>
+      <li>patient</li>
+      <li>q.empi.nextgate.out</li>
+    </ul>
+  </li>
+  <li>The sub-projects (Inbound, Xlate, Outbound) are started in separate terminals.</li>
+  <li>The test web service is up and running.</li>
+  <li>Trigger the REST API Call with the test data.</li>    
 </ul>
 
 
@@ -114,4 +121,19 @@ After the application is started successfully, you will notice the below mention
 .
 .
 [main] INFO  c.r.t.gpte.springboot.Application - Started Application in 6.906 seconds (JVM running for 11.086)
+```
+
+Testing the Application:
+
+Invoke the REST API exposed by the Inbound Application by executing the below command(s). Three data files are given for the testing.
+
+Open a new terminal window and switch to the data directory and execute the following command(s) to test the flow.
+
+```
+curl -k -d@patient1.json -X POST http://localhost:8181/rest/patient/update --header "Content-Type: application/json"
+
+curl -k -d@patient2.json -X POST http://localhost:8181/rest/patient/update --header "Content-Type: application/json"
+
+curl -k -d@patient3.json -X POST http://localhost:8181/rest/patient/update --header "Content-Type: application/json"
+
 ```
