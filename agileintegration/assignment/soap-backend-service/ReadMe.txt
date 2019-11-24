@@ -3,12 +3,8 @@ Camel Project for Spring
 
 To build this project use
 
-    mvn install
+mvn install -Dfabric8.skip=true
 
 To run the project you can execute the following Maven goal
 
-    mvn camel:run
-
-For more help see the Apache Camel documentation
-
-    http://camel.apache.org/
+mvn camel:run -Dfabric8.skip=true
