@@ -75,7 +75,7 @@ After the application is started successfully, you will notice the below mention
 
 Step 2: Starting the Xlate Application:
 
-Open another terminal window execute the below steps.
+Open a new terminal window execute the below steps.
 
 Change the directory to the xlate.
 
@@ -104,14 +104,14 @@ After the application is started successfully, you will notice the below mention
 
 Step 3: Starting the Outbound Application:
 
-Open another terminal window execute the below steps.
+Open a new terminal window execute the below steps.
 
-Change the directory to the xlate.
+Change the directory to the outbound.
 
 ```
 cd ~/assignment_agileintegration/agileintegration/assignment/outbound
 ```
-Compile the code:
+Build the project:
 
 ```
 mvn clean install -DskipTests
@@ -129,6 +129,35 @@ After the application is started successfully, you will notice the below mention
 .
 .
 [main] INFO  c.r.t.gpte.springboot.Application - Started Application in 6.906 seconds (JVM running for 11.086)
+```
+
+Step 4: Starting the Backend SOAP Test Application:
+
+Open a new terminal window execute the below steps.
+
+Change the directory to the soap-backend-service.
+
+```
+cd ~/assignment_agileintegration/agileintegration/assignment/soap-backend-service
+```
+Build the project:
+
+```
+mvn install -Dfabric8.skip=true
+```
+Start the application:
+
+```
+mvn camel:run -Dfabric8.skip=true
+```
+After the application is started successfully, you will notice the below mentioned similar statements in the console log.
+
+```
+org.apache.camel.spring.Main.main() INFO [org.eclipse.jetty.server.Server] - Started @7444ms
+org.apache.camel.spring.Main.main() INFO [org.eclipse.jetty.server.handler.ContextHandler] - Started o.e.j.s.h.ContextHandler@4524622b{/ws,null,AVAILABLE}
+org.apache.camel.spring.Main.main() INFO [org.apache.camel.spring.SpringCamelContext] - Route: _route1 started and consuming from: Endpoint[cxf://bean:customerWebService]
+org.apache.camel.spring.Main.main() INFO [org.apache.camel.spring.SpringCamelContext] - Total 1 routes, of which 1 are started.
+org.apache.camel.spring.Main.main() INFO [org.apache.camel.spring.SpringCamelContext] - Apache Camel 2.17.0.redhat-630224 (CamelContext: _camelContext1) started in 0.964 seconds
 ```
 
 Testing the Application:
