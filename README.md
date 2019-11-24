@@ -49,7 +49,7 @@ Start the application:
 mvn spring-boot:run
 ```
 
-After the application is started successfully, you will notice the below statements in the console log.
+After the application is started successfully, you will notice the below mentioned similar statements in the console log.
 
 ```
 [main] INFO  o.s.b.c.e.u.UndertowEmbeddedServletContainer - Undertow started on port(s) 8082 (http)
@@ -78,11 +78,40 @@ Start the application:
 mvn spring-boot:run
 ```
 
-After the application is started successfully, you will notice the below statements in the console log.
+After the application is started successfully, you will notice the below mentioned similar statements in the console log.
 
 ```
 [main] INFO  o.s.b.c.e.u.UndertowEmbeddedServletContainer - Undertow started on port(s) 8183 (http)
 .
 .
 [main] INFO  c.r.t.gpte.springboot.Application - Started Application in 5.789 seconds (JVM running for 10.088)
+```
+
+Step 3: Starting the Outbound Application:
+
+Open another terminal window execute the below steps.
+
+Change the directory to the xlate.
+
+```
+cd ~/agileintegration/assignment/outbound
+```
+Compile the code:
+
+```
+mvn clean install -DskipTests
+```
+Start the application:
+
+```
+mvn spring-boot:run
+```
+
+After the application is started successfully, you will notice the below mentioned similar statements in the console log.
+
+```
+[main] INFO  o.s.b.c.e.u.UndertowEmbeddedServletContainer - Undertow started on port(s) 8184 (http)
+.
+.
+[main] INFO  c.r.t.gpte.springboot.Application - Started Application in 6.906 seconds (JVM running for 11.086)
 ```
