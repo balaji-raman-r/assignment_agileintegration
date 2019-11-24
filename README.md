@@ -166,6 +166,17 @@ Invoke the REST API exposed by the Inbound Application by executing the below co
 
 Open a new terminal window and switch to the data directory and execute the following command(s) to test the flow.
 
+The test data is provided in the data directory.
+
+Change to the data directory
+
+```
+cd ~/assignment_agileintegration/agileintegration/assignment/data
+
+```
+
+Invoke the REST API using the sample data.
+
 ```
 curl -k -d@patient1.json -X POST http://localhost:8181/rest/patient/update --header "Content-Type: application/json"
 
