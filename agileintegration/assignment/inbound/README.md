@@ -4,7 +4,17 @@ This sub-project exposes RESTful CXF service that receives the patient record an
 
 The application utilizes the Spring to load a Camel Context definition via a [camel-context.xml](src/main/resources/spring/camel-context.xml) file on the classpath.
 
-**IMPORTANT**: This project runs as a standalone application on your machine. 
+**IMPORTANT**: 
+
+This project runs as a standalone application on your machine. 
+
+**Pre-Requisites**
+
+Please ensure the following before running the application
+
+1) AMQ Broker is started and it is up and running.
+2) The AMQ Queue Object (amqp:queue:patient) with the queue name "patient" should be created and the connection to the AMQ should be provided in the application.properties.
+3) The connection parameters for the AMQ Broker are defined in the application properties.
 
 ## Building
 
@@ -22,8 +32,6 @@ Execute the below command to run the test cases:
 ```
 $ mvn test
 ```
-
-
 
 ### Running the Xlate standalone on your machine
 
