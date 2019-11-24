@@ -1,4 +1,4 @@
-# Spring-Boot Camel XML QuickStart
+# Inbound Project
 
 This sub-project exposes RESTful CXF service that receives the patient record and converts the record to XML document and publish to the message Queue.
 
@@ -13,7 +13,7 @@ This project runs as a standalone application on your machine.
 Please ensure the following before running the application
 
 1) AMQ Broker is started and it is up and running.
-2) The AMQ Queue Object (amqp:queue:patient) with the queue name "patient" should be created and the connection to the AMQ should be provided in the application.properties.
+2) The AMQ Queue Object (amqp:queue:patient) with the queue name "patient" is created.
 3) The connection parameters for the AMQ Broker are defined in the application properties.
 
 ## Building
@@ -33,7 +33,7 @@ Execute the below command to run the test cases:
 $ mvn test
 ```
 
-### Running the Xlate standalone on your machine
+### Running the Inbound standalone on your machine
 
 You can run this application as a standalone project directly:
 
