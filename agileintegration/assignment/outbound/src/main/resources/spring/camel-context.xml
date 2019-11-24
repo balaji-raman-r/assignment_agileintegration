@@ -32,11 +32,30 @@
 			<to uri="direct://callWSEndpoint"/>
 		</route>
 		
+		
+		 
 		<route id="_route5">
             <from id="_from5" uri="direct://callWSEndpoint"/>
 			 <log id="_log12" message="After UnMarshal: ${body}"/>
+			  <onException id="_onException_jms">
+                <exception>java.lang.Exception</exception>
+                <handled>
+                    <constant>true</constant>
+                </handled>
+                <log id="_log12345" message="Please check if the back end SOAP Web Service is up and running."/>
+                <to uri="direct:soap-error-response"/>     
+            </onException> 
             <to id="_to7" uri="cxf:bean:customerWebService"/>
             <log id="_log10" loggingLevel="INFO" message=">> WebService Response : ${body[0].id}, ${body[0].salesContact}, ${body[0].company.geo}, ${body[0].contact.firstName}, ${body[0].contact.lastName} "/>
+            
+           
         </route>
+        <route>
+			<from id="soap-error-response" uri="direct:soap-error-response"/>
+			<setExchangePattern id="_setExchangePattern_5" pattern="InOnly"/>
+			 <transform id="_transform_error_soap">
+    	            <constant>Please check if the back end SOAP Web Service is up and running.</constant>
+	         </transform>   
+		</route>
     </camelContext>
 </beans>
