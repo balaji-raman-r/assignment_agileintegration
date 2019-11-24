@@ -4,20 +4,20 @@ This sub-project is used to read the message published by the Inbound project fr
 
 The application utilizes the Spring to load a Camel Context definition via a [camel-context.xml](src/main/resources/spring/camel-context.xml) file on the classpath.
 
-**IMPORTANT**: This project can run as a standalone application on your machine. 
+**IMPORTANT**: This project runs as a standalone application on your machine. 
 
 ## Building
 
-The example can be built with
+The project can be built with
 
     mvn clean install -DskipTests
 
 ### To execute the Unit Test Cases:
 
-You can also execute the test cases as follows.
+You can execute the test cases as follows.
 
-Obtain the project and enter the project's directory
-Build the project:
+Obtain the project and enter the project's directory.
+Execute the below command to run the test cases:
 
 ```
 $ mvn test
@@ -27,12 +27,12 @@ $ mvn test
 
 ### Running the Xlate standalone on your machine
 
-You can also run this application as a standalone project directly:
+You can run this application as a standalone project directly:
 
 Obtain the project and enter the project's directory
 Build the project:
 
 ```
-$ mvn clean package -DskipTests
+$ mvn clean install -DskipTests
 $ mvn spring-boot:run 
 ```
