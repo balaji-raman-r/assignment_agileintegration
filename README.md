@@ -6,15 +6,15 @@ This project facilitates the synchronization of master patient records across di
 
 There are three sub projects as part of this project.
 
-1. InBound:
+1. [Inbound] (assignment/inbound):
 
 This sub-project exposes RESTful CXF service that receives the patient record and converts the record to a XML and publish to the message Queue.
 
-2. Xlate:
+2. [Xlate] (assignment/xlate):
 
 This sub-project is used to read the message published by the Inbound project from the message queue and convert to a different type of Object that is accepted by an external Webservice and publish the object as a XML to a different message queue.
 
-3. OutBound:
+3. [Outbound] (assignment/outbound):
 
 This is the final sub-project that reads the message from the queue and invokes a call to the webservice operation.
 
@@ -46,7 +46,7 @@ git clone https://github.com/balaji-raman-r/assignment_agileintegration.git
 
 Starting the sub projects:
 
-Step 1: Starting the Inbound Application:
+Step 1: Starting the [Inbound] (assignment/inbound) Application:
 
 Change the directory to the inbound.
 
@@ -73,7 +73,7 @@ After the application is started successfully, you will notice the below mention
 [main] INFO  c.r.t.gpte.springboot.Application - Started Application in 5.95 seconds (JVM running for 9.162)
 ```
 
-Step 2: Starting the Xlate Application:
+Step 2: Starting the [Xlate] (assignment/xlate) Application:
 
 Open another terminal window execute the below steps.
 
@@ -102,7 +102,7 @@ After the application is started successfully, you will notice the below mention
 [main] INFO  c.r.t.gpte.springboot.Application - Started Application in 5.789 seconds (JVM running for 10.088)
 ```
 
-Step 3: Starting the Outbound Application:
+Step 3: Starting the [Outbound] (assignment/outbound) Application:
 
 Open another terminal window execute the below steps.
 
