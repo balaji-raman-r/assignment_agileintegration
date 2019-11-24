@@ -43,7 +43,7 @@ Step 1: Starting the Inbound Application:
 Change the directory to the inbound.
 
 ```
-cd ~/agileintegration/assignment/inbound
+cd ~/assignment_agileintegration/agileintegration/assignment/inbound
 ```
 Compile the code:
 
@@ -72,7 +72,7 @@ Open another terminal window execute the below steps.
 Change the directory to the xlate.
 
 ```
-cd ~/agileintegration/assignment/xlate
+cd ~/assignment_agileintegration/agileintegration/assignment/xlate
 ```
 Compile the code:
 
@@ -101,7 +101,7 @@ Open another terminal window execute the below steps.
 Change the directory to the xlate.
 
 ```
-cd ~/agileintegration/assignment/outbound
+cd ~/assignment_agileintegration/agileintegration/assignment/outbound
 ```
 Compile the code:
 
